@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuestionario Inicial — Cooper Cargo × Data Oilers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --ink: #1a1a2e;
+      --ink-soft: #4a4a5a;
+      --ink-muted: #8888a0;
+      --surface: #f8f7f4;
+      --card: #ffffff;
+      --border: #e4e2dd;
+      --accent: #1b5e7b;
+      --accent-light: #e8f4f8;
+      --accent-dark: #0f3d52;
+      --warm: #e87722;
+      --warm-light: #fff5eb;
+      --warm-border: #f0c49b;
+      --success: #2d7a4f;
+      --success-light: #e8f5ee;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-display: 'Fraunces', Georgia, serif;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--surface);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image: radial-gradient(ellipse at 20% 0%, #e8f4f8 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, #fff5eb 0%, transparent 40%);
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #1b5e7b 100%);
+      padding: 2.5rem 1.5rem 2rem;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 24px;
+      background: var(--surface);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, .15);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 20px;
+      padding: .3rem .9rem;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .header h1 {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: .5rem;
+    }
+
+    .header p {
+      font-size: .9rem;
+      opacity: .8;
+      max-width: 360px;
+      margin: 0 auto
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 4rem
+    }
+
+    /* INTRO CARD */
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+      color: var(--accent-dark)
+    }
+
+    .intro p {
+      font-size: .875rem;
+      color: var(--ink-soft);
+      line-height: 1.55
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-bottom: 1.75rem
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .section-num {
+      background: var(--accent);
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent-dark)
+    }
+
+    /* QUESTION CARDS */
+    .q-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1rem;
+      margin-bottom: .75rem;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .q-card:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light)
+    }
+
+    .q-card.answered {
+      border-left: 3px solid var(--success)
+    }
+
+    .q-label {
+      display: block;
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: .15rem;
+      line-height: 1.4;
+    }
+
+    .q-hint {
+      font-size: .78rem;
+      color: var(--ink-muted);
+      margin-bottom: .65rem;
+      line-height: 1.45
+    }
+
+    .q-required {
+      color: var(--warm);
+      font-weight: 700
+    }
+
+    /* INPUTS */
+    textarea,
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: .9rem;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: .65rem .8rem;
+      background: #fafaf8;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    textarea:focus,
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+      background: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.5
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a4a5a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .8rem center;
+      padding-right: 2.2rem
+    }
+
+    /* RADIO/CHECK PILLS */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem
+    }
+
+    .pill {
+      display: block;
+      cursor: pointer;
+    }
+
+    .pill input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0
+    }
+
+    .pill span {
+      display: inline-block;
+      padding: .45rem .85rem;
+      border-radius: 20px;
+      font-size: .82rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--ink-soft);
+      transition: all .15s;
+      user-select: none;
+    }
+
+    .pill input:checked+span {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .pill span:active {
+      transform: scale(.97)
+    }
+
+    /* PROGRESS */
+    .progress-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: .6rem 1rem;
+    }
+
+    .progress-inner {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      max-width: 640px;
+      margin: 0 auto
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--warm));
+      border-radius: 3px;
+      transition: width .4s ease
+    }
+
+    .progress-text {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      white-space: nowrap
+    }
+
+    /* BUTTONS */
+    .btn-group {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: .8rem 1rem;
+      display: flex;
+      gap: .6rem;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .btn {
+      font-family: var(--font-body);
+      font-size: .9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: .7rem 1.5rem;
+      transition: all .15s;
+    }
+
+    .btn:active {
+      transform: scale(.97)
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark)
+    }
+
+    .btn-secondary {
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border: 1px solid var(--accent)
+    }
+
+    .btn-warm {
+      background: var(--warm);
+      color: #fff
+    }
+
+    .btn-warm:hover {
+      background: #d06a1a
+    }
+
+    /* SUCCESS OVERLAY */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 46, .6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .overlay-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      transform: translateY(20px);
+      transition: transform .3s;
+    }
+
+    .overlay.show .overlay-card {
+      transform: translateY(0)
+    }
+
+    .overlay-icon {
+      font-size: 3rem;
+      margin-bottom: .75rem
+    }
+
+    .overlay-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: .5rem;
+      color: var(--accent-dark)
+    }
+
+    .overlay-card p {
+      font-size: .875rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.25rem;
+      line-height: 1.5
+    }
+
+    /* RESPONSIVE */
+    @media(min-width:640px) {
+      .header {
+        padding: 3rem 2rem 2.5rem
+      }
+
+      .header h1 {
+        font-size: 2rem
+      }
+
+      .container {
+        padding: 1.5rem 1.25rem 5rem
+      }
+
+      .q-card {
+        padding: 1.25rem
+      }
+
+      .btn-group {
+        padding: 1rem 1.5rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="header-badge">Confidencial</div>
+    <h1>Cuestionario Inicial<br>Cooper Cargo</h1>
+    <p>Necesitamos conocerte mejor para diseñar la plataforma ideal. Completá lo que puedas — toda info suma.</p>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-inner">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-text" id="progressText">0 de 20</div>
+    </div>
+  </div>
+
+  <div class="container" id="formContainer">
+
+    <div class="intro">
+      <h2>Hola equipo Cooper Cargo 👋</h2>
+      <p>Somos Data Oilers. Para poder armar una propuesta técnica precisa, necesitamos entender bien su operación
+        actual y sus expectativas. Este cuestionario toma unos <strong>15–20 minutos</strong>. No hace falta responder
+        todo hoy — pueden guardar y volver.</p>
+    </div>
+
+    <!-- SECTION 1: NEGOCIO -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">Sobre el Negocio</div>
+      </div>
+
+      <div class="q-card" data-q="1">
+        <label class="q-label">¿Cuántos envíos internacionales procesan por mes actualmente? <span
+            class="q-required">*</span></label>
+        <div class="q-hint">Un rango aproximado está bien.</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q1" value="Menos de 50"><span>Menos de 50</span></label>
+          <label class="pill"><input type="radio" name="q1" value="50 a 200"><span>50 – 200</span></label>
+          <label class="pill"><input type="radio" name="q1" value="200 a 500"><span>200 – 500</span></label>
+          <label class="pill"><input type="radio" name="q1" value="Más de 500"><span>Más de 500</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="2">
+        <label class="q-label">¿Cuántos usuarios/clientes activos tienen hoy? <span class="q-required">*</span></label>
+        <div class="q-hint">Personas o empresas que les envían encomiendas regularmente.</div>
+        <input type="text" name="q2" placeholder="Ej: ~150 clientes activos mensuales">
+      </div>
+
+      <div class="q-card" data-q="3">
+        <label class="q-label">¿Cómo cobra Cooper Cargo hoy?</label>
+        <div class="q-hint">Nos ayuda a diseñar la lógica de pagos de la plataforma.</div>
+        <div class="pills">
+          <label class="pill"><input type="checkbox" name="q3" value="Comisión porcentual sobre envío"><span>Comisión
+              %</span></label>
+          <label class="pill"><input type="checkbox" name="q3" value="Fee fijo por paquete"><span>Fee fijo por
+              paquete</span></label>
+          <label class="pill"><input type="checkbox" name="q3" value="Markup sobre impuestos"><span>Markup sobre
+              impuestos</span></label>
+          <label class="pill"><input type="checkbox" name="q3" value="Otro"><span>Otro</span></label>
+        </div>
+        <textarea name="q3_detail" placeholder="Si elegiste 'Otro' o querés detallar, escribí acá..."
+          style="margin-top:.5rem"></textarea>
+      </div>
+
+      <div class="q-card" data-q="4">
+        <label class="q-label">¿Cuáles son las rutas/orígenes más frecuentes de sus envíos?</label>
+        <div class="q-hint">Seleccioná todos los que apliquen.</div>
+        <div class="pills">
+          <label class="pill"><input type="checkbox" name="q4" value="Estados Unidos"><span>🇺🇸 Estados
+              Unidos</span></label>
+          <label class="pill"><input type="checkbox" name="q4" value="Chile"><span>🇨🇱 Chile</span></label>
+          <label class="pill"><input type="checkbox" name="q4" value="China"><span>🇨🇳 China</span></label>
+          <label class="pill"><input type="checkbox" name="q4" value="Europa"><span>🇪🇺 Europa</span></label>
+          <label class="pill"><input type="checkbox" name="q4" value="Otro"><span>Otro</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="5">
+        <label class="q-label">¿Qué funcionalidades de sus competidores (Tiendamia, Aerobox, DHL eShop) les gustan o les
+          parecen deficientes?</label>
+        <div class="q-hint">Esto nos ayuda a definir su diferencial competitivo.</div>
+        <textarea name="q5"
+          placeholder="Ej: 'Tiendamia tiene buen tracking pero cobra caro el consolidado...'"></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION 2: OPERATIVA -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">Operativa Actual</div>
+      </div>
+
+      <div class="q-card" data-q="6">
+        <label class="q-label">¿Cómo clasifican hoy los productos para Aduana? <span class="q-required">*</span></label>
+        <div class="q-hint">La clasificación arancelaria (NCM) es clave para el módulo de IA.</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q6" value="Manualmente con despachante"><span>Manualmente
+              (despachante)</span></label>
+          <label class="pill"><input type="radio" name="q6" value="Con algún software"><span>Con software</span></label>
+          <label class="pill"><input type="radio" name="q6" value="Consulta VUCE directa"><span>Consulta
+              VUCE</span></label>
+          <label class="pill"><input type="radio" name="q6" value="Otro método"><span>Otro</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="7">
+        <label class="q-label">¿Tienen despachantes de aduana propios o trabajan con externos?</label>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q7" value="Despachante propio"><span>Propio</span></label>
+          <label class="pill"><input type="radio" name="q7" value="Externo/tercerizado"><span>Externo</span></label>
+          <label class="pill"><input type="radio" name="q7" value="Ambos"><span>Ambos</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="8">
+        <label class="q-label">¿Usan actualmente algún sistema de gestión (ERP, CRM, Excel, etc.)?</label>
+        <div class="q-hint">Necesitamos saber si hay datos que migrar o sistemas que integrar.</div>
+        <textarea name="q8"
+          placeholder="Ej: 'Usamos un Excel para tracking y WhatsApp Business para atención al cliente...'"></textarea>
+      </div>
+
+      <div class="q-card" data-q="9">
+        <label class="q-label">¿Tienen contrato corporativo con FedEx? <span class="q-required">*</span></label>
+        <div class="q-hint">Necesitamos saber si ya tienen acceso a la API de developer de FedEx.</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q9" value="Sí, con acceso API"><span>Sí, con API</span></label>
+          <label class="pill"><input type="radio" name="q9" value="Sí, sin acceso API"><span>Sí, sin API</span></label>
+          <label class="pill"><input type="radio" name="q9" value="No, pero estamos gestionando"><span>En
+              gestión</span></label>
+          <label class="pill"><input type="radio" name="q9" value="No"><span>No</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="10">
+        <label class="q-label">¿Tienen certificado digital de AFIP para Web Services?</label>
+        <div class="q-hint">Es necesario para la integración con el sistema aduanero AIDA.</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q10" value="Sí, lo tenemos"><span>Sí</span></label>
+          <label class="pill"><input type="radio" name="q10" value="No, pero podemos gestionarlo"><span>No, pero
+              podemos</span></label>
+          <label class="pill"><input type="radio" name="q10" value="No sé qué es"><span>No sé qué es</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="11">
+        <label class="q-label">¿Operan con algún transportista además de FedEx?</label>
+        <textarea name="q11"
+          placeholder="Ej: 'También usamos Chile Express para la ruta terrestre a Santiago...'"></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION 3: PLATAFORMA -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">La Plataforma Deseada</div>
+      </div>
+
+      <div class="q-card" data-q="12">
+        <label class="q-label">Si tuvieran que elegir UNA sola funcionalidad para arrancar, ¿cuál sería? <span
+            class="q-required">*</span></label>
+        <div class="q-hint">Esto define el MVP (producto mínimo viable).</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q12" value="Cotizador arancelario inteligente"><span>Cotizador
+              arancelario</span></label>
+          <label class="pill"><input type="radio" name="q12" value="Tracking de envíos"><span>Tracking de
+              envíos</span></label>
+          <label class="pill"><input type="radio" name="q12"
+              value="Comparador de precios entre tiendas"><span>Comparador de precios</span></label>
+          <label class="pill"><input type="radio" name="q12" value="Chatbot WhatsApp"><span>Chatbot
+              WhatsApp</span></label>
+          <label class="pill"><input type="radio" name="q12" value="Pasarela de pagos"><span>Pasarela de
+              pagos</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="13">
+        <label class="q-label">¿Qué tiendas son las más importantes para sus clientes?</label>
+        <div class="q-hint">Seleccioná las que más usan.</div>
+        <div class="pills">
+          <label class="pill"><input type="checkbox" name="q13" value="Amazon"><span>Amazon</span></label>
+          <label class="pill"><input type="checkbox" name="q13" value="eBay"><span>eBay</span></label>
+          <label class="pill"><input type="checkbox" name="q13" value="Falabella"><span>Falabella</span></label>
+          <label class="pill"><input type="checkbox" name="q13" value="Ripley"><span>Ripley</span></label>
+          <label class="pill"><input type="checkbox" name="q13" value="Paris"><span>Paris</span></label>
+          <label class="pill"><input type="checkbox" name="q13" value="Mercado Libre"><span>Mercado Libre</span></label>
+          <label class="pill"><input type="checkbox" name="q13" value="AliExpress"><span>AliExpress</span></label>
+          <label class="pill"><input type="checkbox" name="q13" value="Otra"><span>Otra</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="14">
+        <label class="q-label">¿Prefieren una app móvil, una web, o ambas?</label>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q14" value="Solo web (responsive)"><span>Solo web</span></label>
+          <label class="pill"><input type="radio" name="q14" value="Solo app móvil"><span>Solo app</span></label>
+          <label class="pill"><input type="radio" name="q14" value="Ambas"><span>Ambas</span></label>
+          <label class="pill"><input type="radio" name="q14" value="No estoy seguro"><span>No sé aún</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="15">
+        <label class="q-label">¿Necesitan un panel interno para su equipo operativo?</label>
+        <div class="q-hint">Dashboard para gestionar envíos, ver métricas, administrar clientes, etc.</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q15" value="Sí, es fundamental"><span>Sí,
+              fundamental</span></label>
+          <label class="pill"><input type="radio" name="q15" value="Sería útil pero no prioritario"><span>Útil pero no
+              urgente</span></label>
+          <label class="pill"><input type="radio" name="q15" value="No, con lo actual alcanza"><span>No por
+              ahora</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: PRESUPUESTO Y TIEMPOS -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">Presupuesto y Tiempos</div>
+      </div>
+
+      <div class="q-card" data-q="16">
+        <label class="q-label">¿Tienen un rango presupuestario definido para este proyecto?</label>
+        <div class="q-hint">Esto nos ayuda a dimensionar el alcance realista.</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q16" value="Menos de USD 30.000"><span>&lt; USD
+              30K</span></label>
+          <label class="pill"><input type="radio" name="q16" value="USD 30.000 a 60.000"><span>USD
+              30K–60K</span></label>
+          <label class="pill"><input type="radio" name="q16" value="USD 60.000 a 100.000"><span>USD
+              60K–100K</span></label>
+          <label class="pill"><input type="radio" name="q16" value="Más de USD 100.000"><span>&gt; USD
+              100K</span></label>
+          <label class="pill"><input type="radio" name="q16" value="Prefiero no decir aún"><span>Prefiero no
+              decir</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="17">
+        <label class="q-label">¿Es inversión propia o buscan financiamiento?</label>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q17" value="Inversión propia"><span>Inversión
+              propia</span></label>
+          <label class="pill"><input type="radio" name="q17" value="Buscando inversores"><span>Buscando
+              inversores</span></label>
+          <label class="pill"><input type="radio" name="q17" value="Crédito productivo"><span>Crédito
+              productivo</span></label>
+          <label class="pill"><input type="radio" name="q17" value="Mixto"><span>Mixto</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="18">
+        <label class="q-label">¿Hay alguna fecha límite o urgencia?</label>
+        <div class="q-hint">Ej: temporada alta, compromiso con inversores, fecha de licitación.</div>
+        <textarea name="q18" placeholder="Ej: 'Nos gustaría tener algo funcionando para noviembre 2026...'"></textarea>
+      </div>
+
+      <div class="q-card" data-q="19">
+        <label class="q-label">¿Esperan ser dueños del código fuente?</label>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="q19" value="Sí, quiero ser dueño del código"><span>Sí, ser
+              dueños</span></label>
+          <label class="pill"><input type="radio" name="q19"
+              value="Prefiero modelo SaaS (ustedes mantienen)"><span>Modelo SaaS</span></label>
+          <label class="pill"><input type="radio" name="q19" value="No lo tengo claro"><span>No lo tengo
+              claro</span></label>
+        </div>
+      </div>
+
+      <div class="q-card" data-q="20">
+        <label class="q-label">¿Algo más que quieran contarnos?</label>
+        <div class="q-hint">Cualquier detalle, preocupación o idea que no hayamos cubierto.</div>
+        <textarea name="q20" rows="4" placeholder="Escribí libremente..."></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FIXED BUTTONS -->
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="saveProgress()">💾 Guardar</button>
+    <button class="btn btn-primary" onclick="generateSummary()">📋 Enviar Respuestas</button>
+  </div>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay">
+    <div class="overlay-card">
+      <div class="overlay-icon" id="overlayIcon">✅</div>
+      <h3 id="overlayTitle">¡Respuestas copiadas!</h3>
+      <p id="overlayText">El resumen de tus respuestas fue copiado al portapapeles. Podés pegarlo en WhatsApp y enviarlo
+        a Data Oilers.</p>
+      <button class="btn btn-primary" onclick="closeOverlay()" style="margin-right:.5rem">Cerrar</button>
+      <button class="btn btn-warm" onclick="shareWhatsApp()">Enviar por WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    const TOTAL_Q = 20;
+    const STORAGE_KEY = 'cooper_cargo_form';
+
+    // Load saved data
+    function loadProgress() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+        Object.entries(data).forEach(([name, value]) => {
+          if (Array.isArray(value)) {
+            value.forEach(v => {
+              const el = document.querySelector(`[name="${name}"][value="${v}"]`);
+              if (el) el.checked = true;
+            });
+          } else {
+            const el = document.querySelector(`[name="${name}"]`);
+            if (el) {
+              if (el.type === 'radio') {
+                const radio = document.querySelector(`[name="${name}"][value="${value}"]`);
+                if (radio) radio.checked = true;
+              } else {
+                el.value = value;
+              }
+            }
+          }
+        });
+        updateProgress();
+        updateAnsweredCards();
+      } catch (e) { }
+    }
+
+    function getFormData() {
+      const data = {};
+      // Radio buttons
+      document.querySelectorAll('input[type="radio"]:checked').forEach(el => {
+        data[el.name] = el.value;
+      });
+      // Checkboxes
+      const checkboxGroups = {};
+      document.querySelectorAll('input[type="checkbox"]:checked').forEach(el => {
+        if (!checkboxGroups[el.name]) checkboxGroups[el.name] = [];
+        checkboxGroups[el.name].push(el.value);
+      });
+      Object.assign(data, checkboxGroups);
+      // Text inputs and textareas
+      document.querySelectorAll('textarea, input[type="text"], input[type="number"], input[type="email"]').forEach(el => {
+        if (el.value.trim()) data[el.name] = el.value.trim();
+      });
+      return data;
+    }
+
+    function saveProgress() {
+      const data = getFormData();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      showOverlay('💾', '¡Progreso guardado!', 'Podés cerrar esta página y volver cuando quieras. Tus respuestas estarán acá.');
+    }
+
+    function countAnswered() {
+      let count = 0;
+      for (let i = 1; i <= TOTAL_Q; i++) {
+        const card = document.querySelector(`[data-q="${i}"]`);
+        if (!card) continue;
+        const radios = card.querySelectorAll('input[type="radio"]:checked');
+        const checks = card.querySelectorAll('input[type="checkbox"]:checked');
+        const texts = card.querySelectorAll('textarea, input[type="text"], input[type="number"], input[type="email"]');
+        let hasText = false;
+        texts.forEach(t => { if (t.value.trim()) hasText = true; });
+        if (radios.length > 0 || checks.length > 0 || hasText) count++;
+      }
+      return count;
+    }
+
+    function updateProgress() {
+      const count = countAnswered();
+      const pct = Math.round((count / TOTAL_Q) * 100);
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressText').textContent = count + ' de ' + TOTAL_Q;
+    }
+
+    function updateAnsweredCards() {
+      for (let i = 1; i <= TOTAL_Q; i++) {
+        const card = document.querySelector(`[data-q="${i}"]`);
+        if (!card) continue;
+        const radios = card.querySelectorAll('input[type="radio"]:checked');
+        const checks = card.querySelectorAll('input[type="checkbox"]:checked');
+        const texts = card.querySelectorAll('textarea, input[type="text"]');
+        let hasText = false;
+        texts.forEach(t => { if (t.value.trim()) hasText = true; });
+        card.classList.toggle('answered', radios.length > 0 || checks.length > 0 || hasText);
+      }
+    }
+
+    // Listen for changes
+    document.addEventListener('change', () => { updateProgress(); updateAnsweredCards(); });
+    document.addEventListener('input', () => { updateProgress(); updateAnsweredCards(); });
+
+    const QUESTIONS_MAP = {
+      q1: '¿Envíos internacionales por mes?',
+      q2: '¿Usuarios/clientes activos?',
+      q3: '¿Cómo cobra Cooper Cargo?',
+      q3_detail: '(Detalle modelo de cobro)',
+      q4: '¿Rutas/orígenes más frecuentes?',
+      q5: '¿Opinión sobre competidores?',
+      q6: '¿Cómo clasifican para Aduana?',
+      q7: '¿Despachantes propios o externos?',
+      q8: '¿Sistemas de gestión actuales?',
+      q9: '¿Contrato con FedEx?',
+      q10: '¿Certificado AFIP?',
+      q11: '¿Otros transportistas?',
+      q12: '¿Funcionalidad prioritaria para MVP?',
+      q13: '¿Tiendas más importantes?',
+      q14: '¿App, web o ambas?',
+      q15: '¿Panel interno para el equipo?',
+      q16: '¿Rango presupuestario?',
+      q17: '¿Tipo de inversión?',
+      q18: '¿Fecha límite o urgencia?',
+      q19: '¿Propiedad del código?',
+      q20: '¿Algo más?',
+    };
+
+    function generateSummary() {
+      const data = getFormData();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+      let text = '📋 *CUESTIONARIO COOPER CARGO*\n';
+      text += '━━━━━━━━━━━━━━━━━━━━━\n\n';
+
+      const sections = [
+        { title: '🏢 NEGOCIO', keys: ['q1', 'q2', 'q3', 'q3_detail', 'q4', 'q5'] },
+        { title: '⚙️ OPERATIVA', keys: ['q6', 'q7', 'q8', 'q9', 'q10', 'q11'] },
+        { title: '💻 PLATAFORMA', keys: ['q12', 'q13', 'q14', 'q15'] },
+        { title: '💰 PRESUPUESTO Y TIEMPOS', keys: ['q16', 'q17', 'q18', 'q19', 'q20'] },
+      ];
+
+      sections.forEach(section => {
+        text += `*${section.title}*\n`;
+        section.keys.forEach(key => {
+          const label = QUESTIONS_MAP[key];
+          const val = data[key];
+          if (val) {
+            const display = Array.isArray(val) ? val.join(', ') : val;
+            text += `• ${label}\n  → ${display}\n`;
+          }
+        });
+        text += '\n';
+      });
+
+      text += '━━━━━━━━━━━━━━━━━━━━━\n';
+      text += `Respondidas: ${countAnswered()} de ${TOTAL_Q}\n`;
+      text += 'Enviado desde formulario Data Oilers';
+
+      window._lastSummary = text;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showOverlay('✅', '¡Respuestas copiadas!', 'El resumen fue copiado al portapapeles. Podés pegarlo en WhatsApp o tocá el botón para enviarlo directamente.');
+      }).catch(() => {
+        showOverlay('📋', 'Resumen generado', 'No se pudo copiar automáticamente. Tocá "Enviar por WhatsApp" para compartir directamente.');
+      });
+    }
+
+    function shareWhatsApp() {
+      const text = window._lastSummary || 'Error generando resumen';
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    }
+
+    function showOverlay(icon, title, text) {
+      document.getElementById('overlayIcon').textContent = icon;
+      document.getElementById('overlayTitle').textContent = title;
+      document.getElementById('overlayText').textContent = text;
+      document.getElementById('overlay').classList.add('show');
+    }
+    function closeOverlay() {
+      document.getElementById('overlay').classList.remove('show');
+    }
+
+    // Init
+    loadProgress();
+  </script>
+</body>
+
+</html>
