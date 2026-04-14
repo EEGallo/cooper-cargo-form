@@ -711,17 +711,6 @@
         <textarea name="q18" placeholder="Ej: 'Nos gustaría tener algo funcionando para noviembre 2026...'"></textarea>
       </div>
       <div class="q-card" data-q="19">
-        <label class="q-label">¿Esperan ser dueños del código fuente?</label>
-        <div class="pills">
-          <label class="pill"><input type="radio" name="q19" value="Sí, quiero ser dueño del código"><span>Sí, ser
-              dueños</span></label>
-          <label class="pill"><input type="radio" name="q19"
-              value="Prefiero modelo SaaS (ustedes mantienen)"><span>Modelo SaaS</span></label>
-          <label class="pill"><input type="radio" name="q19" value="No lo tengo claro"><span>No lo tengo
-              claro</span></label>
-        </div>
-      </div>
-      <div class="q-card" data-q="20">
         <label class="q-label">¿Algo más que quieran contarnos?</label>
         <div class="q-hint">Cualquier detalle, preocupación o idea que no hayamos cubierto.</div>
         <textarea name="q20" rows="4" placeholder="Escribí libremente..."></textarea>
@@ -753,10 +742,10 @@
     var WHATSAPP_NUMBER = '5492604417168';
 
     // 👇 REEMPLAZAR con la URL de tu Google Apps Script (ver instrucciones)
-    var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby21ktElhnxeHoa_vN_7qdOQ7ad7qB6DLWUnwEKBpaxtOKze6WC2YxOJUam5PwmMlv4/exec';
+    var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTa7pDf2dna3rK3vl4iTSsUif9JejG6j5XUvNFKsNP_a_SInvRU26VjdqC3ZSScQaQ/exec';
     // =============================================
 
-    var TOTAL_Q = 20;
+    var TOTAL_Q = 19;
     var STORAGE_KEY = 'cooper_cargo_form';
 
     function loadProgress() {
@@ -843,7 +832,7 @@
       q4: 'Rutas frecuentes', q5: 'Opinión competidores', q6: 'Clasificación aduanera', q7: 'Despachantes',
       q8: 'Sistemas actuales', q9: 'Contrato FedEx', q10: 'Certificado AFIP', q11: 'Otros transportistas',
       q12: 'Funcionalidad MVP', q13: 'Tiendas importantes', q14: 'App/Web', q15: 'Panel interno',
-      q16: 'Presupuesto', q17: 'Tipo inversión', q18: 'Fecha límite', q19: 'Propiedad código', q20: 'Comentarios'
+      q16: 'Presupuesto', q17: 'Tipo inversión', q18: 'Fecha límite', q20: 'Comentarios'
     };
 
     function buildWhatsAppText(data) {
@@ -852,7 +841,7 @@
         { title: '🏢 NEGOCIO', keys: ['q1', 'q2', 'q3', 'q3_detail', 'q4', 'q5'] },
         { title: '⚙️ OPERATIVA', keys: ['q6', 'q7', 'q8', 'q9', 'q10', 'q11'] },
         { title: '💻 PLATAFORMA', keys: ['q12', 'q13', 'q14', 'q15'] },
-        { title: '💰 PRESUPUESTO', keys: ['q16', 'q17', 'q18', 'q19', 'q20'] }
+        { title: '💰 PRESUPUESTO', keys: ['q16', 'q17', 'q18', 'q20'] }
       ];
       sections.forEach(function (s) {
         text += '*' + s.title + '*\n';
