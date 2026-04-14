@@ -54,7 +54,6 @@
         radial-gradient(ellipse at 80% 100%, #fff5eb 0%, transparent 40%);
     }
 
-    /* HEADER */
     .header {
       background: linear-gradient(135deg, #1a1a2e 0%, #1b5e7b 100%);
       padding: 2.5rem 1.5rem 2rem;
@@ -103,14 +102,12 @@
       margin: 0 auto
     }
 
-    /* CONTAINER */
     .container {
       max-width: 640px;
       margin: 0 auto;
-      padding: 1.25rem 1rem 4rem
+      padding: 1.25rem 1rem 5rem
     }
 
-    /* INTRO CARD */
     .intro {
       background: var(--card);
       border: 1px solid var(--border);
@@ -132,7 +129,6 @@
       line-height: 1.55
     }
 
-    /* SECTIONS */
     .section {
       margin-bottom: 1.75rem
     }
@@ -166,7 +162,6 @@
       color: var(--accent-dark)
     }
 
-    /* QUESTION CARDS */
     .q-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -206,7 +201,6 @@
       font-weight: 700
     }
 
-    /* INPUTS */
     textarea,
     input[type="text"],
     input[type="number"],
@@ -238,15 +232,6 @@
       line-height: 1.5
     }
 
-    select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a4a5a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right .8rem center;
-      padding-right: 2.2rem
-    }
-
-    /* RADIO/CHECK PILLS */
     .pills {
       display: flex;
       flex-wrap: wrap;
@@ -255,7 +240,7 @@
 
     .pill {
       display: block;
-      cursor: pointer;
+      cursor: pointer
     }
 
     .pill input {
@@ -281,14 +266,13 @@
     .pill input:checked+span {
       background: var(--accent);
       color: #fff;
-      border-color: var(--accent);
+      border-color: var(--accent)
     }
 
     .pill span:active {
       transform: scale(.97)
     }
 
-    /* PROGRESS */
     .progress-bar {
       position: sticky;
       top: 0;
@@ -328,7 +312,6 @@
       white-space: nowrap
     }
 
-    /* BUTTONS */
     .btn-group {
       position: fixed;
       bottom: 0;
@@ -373,16 +356,20 @@
       border: 1px solid var(--accent)
     }
 
-    .btn-warm {
-      background: var(--warm);
+    .btn-whatsapp {
+      background: #25D366;
       color: #fff
     }
 
-    .btn-warm:hover {
-      background: #d06a1a
+    .btn-whatsapp:hover {
+      background: #1da851
     }
 
-    /* SUCCESS OVERLAY */
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed
+    }
+
     .overlay {
       position: fixed;
       inset: 0;
@@ -434,10 +421,40 @@
       font-size: .875rem;
       color: var(--ink-soft);
       margin-bottom: 1.25rem;
-      line-height: 1.5
+      line-height: 1.5;
+      white-space: pre-line
     }
 
-    /* RESPONSIVE */
+    .overlay-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center
+    }
+
+    .status-toast {
+      position: fixed;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--ink);
+      color: #fff;
+      padding: .6rem 1.2rem;
+      border-radius: 20px;
+      font-size: .82rem;
+      font-weight: 500;
+      z-index: 300;
+      transition: transform .3s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .status-toast.show {
+      transform: translateX(-50%) translateY(0)
+    }
+
     @media(min-width:640px) {
       .header {
         padding: 3rem 2rem 2.5rem
@@ -463,13 +480,11 @@
 </head>
 
 <body>
-
   <div class="header">
     <div class="header-badge">Confidencial</div>
     <h1>Cuestionario Inicial<br>Cooper Cargo</h1>
     <p>Necesitamos conocerte mejor para diseñar la plataforma ideal. Completá lo que puedas — toda info suma.</p>
   </div>
-
   <div class="progress-bar">
     <div class="progress-inner">
       <div class="progress-track">
@@ -478,23 +493,18 @@
       <div class="progress-text" id="progressText">0 de 20</div>
     </div>
   </div>
-
   <div class="container" id="formContainer">
-
     <div class="intro">
       <h2>Hola equipo Cooper Cargo 👋</h2>
-      <p>Somos Data Oilers. Para poder armar una propuesta técnica precisa, necesitamos entender bien su operación
-        actual y sus expectativas. Este cuestionario toma unos <strong>15–20 minutos</strong>. No hace falta responder
-        todo hoy — pueden guardar y volver.</p>
+      <p>Somos <strong>Data Oilers</strong>. Para poder armar una propuesta técnica precisa y un presupuesto realista,
+        necesitamos entender bien su operación actual y sus expectativas. Este cuestionario toma unos <strong>15–20
+          minutos</strong>. No hace falta responder todo hoy — pueden guardar y volver.</p>
     </div>
-
-    <!-- SECTION 1: NEGOCIO -->
     <div class="section">
       <div class="section-header">
         <div class="section-num">1</div>
         <div class="section-title">Sobre el Negocio</div>
       </div>
-
       <div class="q-card" data-q="1">
         <label class="q-label">¿Cuántos envíos internacionales procesan por mes actualmente? <span
             class="q-required">*</span></label>
@@ -506,13 +516,11 @@
           <label class="pill"><input type="radio" name="q1" value="Más de 500"><span>Más de 500</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="2">
         <label class="q-label">¿Cuántos usuarios/clientes activos tienen hoy? <span class="q-required">*</span></label>
         <div class="q-hint">Personas o empresas que les envían encomiendas regularmente.</div>
         <input type="text" name="q2" placeholder="Ej: ~150 clientes activos mensuales">
       </div>
-
       <div class="q-card" data-q="3">
         <label class="q-label">¿Cómo cobra Cooper Cargo hoy?</label>
         <div class="q-hint">Nos ayuda a diseñar la lógica de pagos de la plataforma.</div>
@@ -528,7 +536,6 @@
         <textarea name="q3_detail" placeholder="Si elegiste 'Otro' o querés detallar, escribí acá..."
           style="margin-top:.5rem"></textarea>
       </div>
-
       <div class="q-card" data-q="4">
         <label class="q-label">¿Cuáles son las rutas/orígenes más frecuentes de sus envíos?</label>
         <div class="q-hint">Seleccioná todos los que apliquen.</div>
@@ -541,7 +548,6 @@
           <label class="pill"><input type="checkbox" name="q4" value="Otro"><span>Otro</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="5">
         <label class="q-label">¿Qué funcionalidades de sus competidores (Tiendamia, Aerobox, DHL eShop) les gustan o les
           parecen deficientes?</label>
@@ -550,14 +556,11 @@
           placeholder="Ej: 'Tiendamia tiene buen tracking pero cobra caro el consolidado...'"></textarea>
       </div>
     </div>
-
-    <!-- SECTION 2: OPERATIVA -->
     <div class="section">
       <div class="section-header">
         <div class="section-num">2</div>
         <div class="section-title">Operativa Actual</div>
       </div>
-
       <div class="q-card" data-q="6">
         <label class="q-label">¿Cómo clasifican hoy los productos para Aduana? <span class="q-required">*</span></label>
         <div class="q-hint">La clasificación arancelaria (NCM) es clave para el módulo de IA.</div>
@@ -570,7 +573,6 @@
           <label class="pill"><input type="radio" name="q6" value="Otro método"><span>Otro</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="7">
         <label class="q-label">¿Tienen despachantes de aduana propios o trabajan con externos?</label>
         <div class="pills">
@@ -579,14 +581,12 @@
           <label class="pill"><input type="radio" name="q7" value="Ambos"><span>Ambos</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="8">
         <label class="q-label">¿Usan actualmente algún sistema de gestión (ERP, CRM, Excel, etc.)?</label>
         <div class="q-hint">Necesitamos saber si hay datos que migrar o sistemas que integrar.</div>
         <textarea name="q8"
           placeholder="Ej: 'Usamos un Excel para tracking y WhatsApp Business para atención al cliente...'"></textarea>
       </div>
-
       <div class="q-card" data-q="9">
         <label class="q-label">¿Tienen contrato corporativo con FedEx? <span class="q-required">*</span></label>
         <div class="q-hint">Necesitamos saber si ya tienen acceso a la API de developer de FedEx.</div>
@@ -598,7 +598,6 @@
           <label class="pill"><input type="radio" name="q9" value="No"><span>No</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="10">
         <label class="q-label">¿Tienen certificado digital de AFIP para Web Services?</label>
         <div class="q-hint">Es necesario para la integración con el sistema aduanero AIDA.</div>
@@ -609,21 +608,17 @@
           <label class="pill"><input type="radio" name="q10" value="No sé qué es"><span>No sé qué es</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="11">
         <label class="q-label">¿Operan con algún transportista además de FedEx?</label>
         <textarea name="q11"
           placeholder="Ej: 'También usamos Chile Express para la ruta terrestre a Santiago...'"></textarea>
       </div>
     </div>
-
-    <!-- SECTION 3: PLATAFORMA -->
     <div class="section">
       <div class="section-header">
         <div class="section-num">3</div>
         <div class="section-title">La Plataforma Deseada</div>
       </div>
-
       <div class="q-card" data-q="12">
         <label class="q-label">Si tuvieran que elegir UNA sola funcionalidad para arrancar, ¿cuál sería? <span
             class="q-required">*</span></label>
@@ -641,7 +636,6 @@
               pagos</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="13">
         <label class="q-label">¿Qué tiendas son las más importantes para sus clientes?</label>
         <div class="q-hint">Seleccioná las que más usan.</div>
@@ -656,7 +650,6 @@
           <label class="pill"><input type="checkbox" name="q13" value="Otra"><span>Otra</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="14">
         <label class="q-label">¿Prefieren una app móvil, una web, o ambas?</label>
         <div class="pills">
@@ -666,7 +659,6 @@
           <label class="pill"><input type="radio" name="q14" value="No estoy seguro"><span>No sé aún</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="15">
         <label class="q-label">¿Necesitan un panel interno para su equipo operativo?</label>
         <div class="q-hint">Dashboard para gestionar envíos, ver métricas, administrar clientes, etc.</div>
@@ -680,14 +672,11 @@
         </div>
       </div>
     </div>
-
-    <!-- SECTION 4: PRESUPUESTO Y TIEMPOS -->
     <div class="section">
       <div class="section-header">
         <div class="section-num">4</div>
         <div class="section-title">Presupuesto y Tiempos</div>
       </div>
-
       <div class="q-card" data-q="16">
         <label class="q-label">¿Tienen un rango presupuestario definido para este proyecto?</label>
         <div class="q-hint">Esto nos ayuda a dimensionar el alcance realista.</div>
@@ -704,7 +693,6 @@
               decir</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="17">
         <label class="q-label">¿Es inversión propia o buscan financiamiento?</label>
         <div class="pills">
@@ -717,13 +705,11 @@
           <label class="pill"><input type="radio" name="q17" value="Mixto"><span>Mixto</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="18">
         <label class="q-label">¿Hay alguna fecha límite o urgencia?</label>
         <div class="q-hint">Ej: temporada alta, compromiso con inversores, fecha de licitación.</div>
         <textarea name="q18" placeholder="Ej: 'Nos gustaría tener algo funcionando para noviembre 2026...'"></textarea>
       </div>
-
       <div class="q-card" data-q="19">
         <label class="q-label">¿Esperan ser dueños del código fuente?</label>
         <div class="pills">
@@ -735,200 +721,190 @@
               claro</span></label>
         </div>
       </div>
-
       <div class="q-card" data-q="20">
         <label class="q-label">¿Algo más que quieran contarnos?</label>
         <div class="q-hint">Cualquier detalle, preocupación o idea que no hayamos cubierto.</div>
         <textarea name="q20" rows="4" placeholder="Escribí libremente..."></textarea>
       </div>
     </div>
-
   </div>
-
-  <!-- FIXED BUTTONS -->
   <div class="btn-group">
     <button class="btn btn-secondary" onclick="saveProgress()">💾 Guardar</button>
-    <button class="btn btn-primary" onclick="generateSummary()">📋 Enviar Respuestas</button>
+    <button class="btn btn-whatsapp" onclick="submitForm()" id="btnSubmit">📩 Enviar Respuestas</button>
   </div>
-
-  <!-- OVERLAY -->
+  <div class="status-toast" id="toast">
+    <span id="toastText">Guardado</span>
+  </div>
   <div class="overlay" id="overlay">
     <div class="overlay-card">
       <div class="overlay-icon" id="overlayIcon">✅</div>
-      <h3 id="overlayTitle">¡Respuestas copiadas!</h3>
-      <p id="overlayText">El resumen de tus respuestas fue copiado al portapapeles. Podés pegarlo en WhatsApp y enviarlo
-        a Data Oilers.</p>
-      <button class="btn btn-primary" onclick="closeOverlay()" style="margin-right:.5rem">Cerrar</button>
-      <button class="btn btn-warm" onclick="shareWhatsApp()">Enviar por WhatsApp</button>
+      <h3 id="overlayTitle">¡Listo!</h3>
+      <p id="overlayText"></p>
+      <div class="overlay-buttons">
+        <button class="btn btn-secondary" onclick="closeOverlay()">Cerrar</button>
+        <button class="btn btn-whatsapp" id="btnWhatsApp" onclick="shareWhatsApp()">💬 Enviar por WhatsApp</button>
+      </div>
     </div>
   </div>
-
   <script>
-    const TOTAL_Q = 20;
-    const STORAGE_KEY = 'cooper_cargo_form';
+    // =============================================
+    // ⚙️ CONFIGURACIÓN
+    // =============================================
+    var WHATSAPP_NUMBER = '5492604417168';
 
-    // Load saved data
+    // 👇 REEMPLAZAR con la URL de tu Google Apps Script (ver instrucciones)
+    var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby21ktElhnxeHoa_vN_7qdOQ7ad7qB6DLWUnwEKBpaxtOKze6WC2YxOJUam5PwmMlv4/exec';
+    // =============================================
+
+    var TOTAL_Q = 20;
+    var STORAGE_KEY = 'cooper_cargo_form';
+
     function loadProgress() {
       try {
-        const saved = localStorage.getItem(STORAGE_KEY);
+        var saved = localStorage.getItem(STORAGE_KEY);
         if (!saved) return;
-        const data = JSON.parse(saved);
-        Object.entries(data).forEach(([name, value]) => {
+        var data = JSON.parse(saved);
+        Object.keys(data).forEach(function (name) {
+          var value = data[name];
           if (Array.isArray(value)) {
-            value.forEach(v => {
-              const el = document.querySelector(`[name="${name}"][value="${v}"]`);
+            value.forEach(function (v) {
+              var el = document.querySelector('[name="' + name + '"][value="' + v + '"]');
               if (el) el.checked = true;
             });
           } else {
-            const el = document.querySelector(`[name="${name}"]`);
+            var el = document.querySelector('[name="' + name + '"]');
             if (el) {
               if (el.type === 'radio') {
-                const radio = document.querySelector(`[name="${name}"][value="${value}"]`);
+                var radio = document.querySelector('[name="' + name + '"][value="' + value + '"]');
                 if (radio) radio.checked = true;
-              } else {
-                el.value = value;
-              }
+              } else { el.value = value; }
             }
           }
         });
-        updateProgress();
-        updateAnsweredCards();
+        updateProgress(); updateAnsweredCards();
       } catch (e) { }
     }
 
     function getFormData() {
-      const data = {};
-      // Radio buttons
-      document.querySelectorAll('input[type="radio"]:checked').forEach(el => {
-        data[el.name] = el.value;
+      var data = {};
+      document.querySelectorAll('input[type="radio"]:checked').forEach(function (el) { data[el.name] = el.value; });
+      var cg = {};
+      document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (el) {
+        if (!cg[el.name]) cg[el.name] = []; cg[el.name].push(el.value);
       });
-      // Checkboxes
-      const checkboxGroups = {};
-      document.querySelectorAll('input[type="checkbox"]:checked').forEach(el => {
-        if (!checkboxGroups[el.name]) checkboxGroups[el.name] = [];
-        checkboxGroups[el.name].push(el.value);
-      });
-      Object.assign(data, checkboxGroups);
-      // Text inputs and textareas
-      document.querySelectorAll('textarea, input[type="text"], input[type="number"], input[type="email"]').forEach(el => {
+      Object.keys(cg).forEach(function (k) { data[k] = cg[k]; });
+      document.querySelectorAll('textarea,input[type="text"]').forEach(function (el) {
         if (el.value.trim()) data[el.name] = el.value.trim();
       });
       return data;
     }
 
-    function saveProgress() {
-      const data = getFormData();
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      showOverlay('💾', '¡Progreso guardado!', 'Podés cerrar esta página y volver cuando quieras. Tus respuestas estarán acá.');
-    }
-
     function countAnswered() {
-      let count = 0;
-      for (let i = 1; i <= TOTAL_Q; i++) {
-        const card = document.querySelector(`[data-q="${i}"]`);
+      var count = 0;
+      for (var i = 1; i <= TOTAL_Q; i++) {
+        var card = document.querySelector('[data-q="' + i + '"]');
         if (!card) continue;
-        const radios = card.querySelectorAll('input[type="radio"]:checked');
-        const checks = card.querySelectorAll('input[type="checkbox"]:checked');
-        const texts = card.querySelectorAll('textarea, input[type="text"], input[type="number"], input[type="email"]');
-        let hasText = false;
-        texts.forEach(t => { if (t.value.trim()) hasText = true; });
-        if (radios.length > 0 || checks.length > 0 || hasText) count++;
+        var r = card.querySelectorAll('input[type="radio"]:checked');
+        var c = card.querySelectorAll('input[type="checkbox"]:checked');
+        var t = card.querySelectorAll('textarea,input[type="text"]');
+        var hasText = false;
+        t.forEach(function (el) { if (el.value.trim()) hasText = true; });
+        if (r.length > 0 || c.length > 0 || hasText) count++;
       }
       return count;
     }
 
     function updateProgress() {
-      const count = countAnswered();
-      const pct = Math.round((count / TOTAL_Q) * 100);
+      var count = countAnswered();
+      var pct = Math.round((count / TOTAL_Q) * 100);
       document.getElementById('progressFill').style.width = pct + '%';
       document.getElementById('progressText').textContent = count + ' de ' + TOTAL_Q;
     }
 
     function updateAnsweredCards() {
-      for (let i = 1; i <= TOTAL_Q; i++) {
-        const card = document.querySelector(`[data-q="${i}"]`);
+      for (var i = 1; i <= TOTAL_Q; i++) {
+        var card = document.querySelector('[data-q="' + i + '"]');
         if (!card) continue;
-        const radios = card.querySelectorAll('input[type="radio"]:checked');
-        const checks = card.querySelectorAll('input[type="checkbox"]:checked');
-        const texts = card.querySelectorAll('textarea, input[type="text"]');
-        let hasText = false;
-        texts.forEach(t => { if (t.value.trim()) hasText = true; });
-        card.classList.toggle('answered', radios.length > 0 || checks.length > 0 || hasText);
+        var r = card.querySelectorAll('input[type="radio"]:checked');
+        var c = card.querySelectorAll('input[type="checkbox"]:checked');
+        var t = card.querySelectorAll('textarea,input[type="text"]');
+        var hasText = false;
+        t.forEach(function (el) { if (el.value.trim()) hasText = true; });
+        if (r.length > 0 || c.length > 0 || hasText) { card.classList.add('answered'); }
+        else { card.classList.remove('answered'); }
       }
     }
 
-    // Listen for changes
-    document.addEventListener('change', () => { updateProgress(); updateAnsweredCards(); });
-    document.addEventListener('input', () => { updateProgress(); updateAnsweredCards(); });
+    document.addEventListener('change', function () { updateProgress(); updateAnsweredCards(); });
+    document.addEventListener('input', function () { updateProgress(); updateAnsweredCards(); });
 
-    const QUESTIONS_MAP = {
-      q1: '¿Envíos internacionales por mes?',
-      q2: '¿Usuarios/clientes activos?',
-      q3: '¿Cómo cobra Cooper Cargo?',
-      q3_detail: '(Detalle modelo de cobro)',
-      q4: '¿Rutas/orígenes más frecuentes?',
-      q5: '¿Opinión sobre competidores?',
-      q6: '¿Cómo clasifican para Aduana?',
-      q7: '¿Despachantes propios o externos?',
-      q8: '¿Sistemas de gestión actuales?',
-      q9: '¿Contrato con FedEx?',
-      q10: '¿Certificado AFIP?',
-      q11: '¿Otros transportistas?',
-      q12: '¿Funcionalidad prioritaria para MVP?',
-      q13: '¿Tiendas más importantes?',
-      q14: '¿App, web o ambas?',
-      q15: '¿Panel interno para el equipo?',
-      q16: '¿Rango presupuestario?',
-      q17: '¿Tipo de inversión?',
-      q18: '¿Fecha límite o urgencia?',
-      q19: '¿Propiedad del código?',
-      q20: '¿Algo más?',
+    var QUESTIONS_MAP = {
+      q1: 'Envíos por mes', q2: 'Clientes activos', q3: 'Modelo de cobro', q3_detail: 'Detalle cobro',
+      q4: 'Rutas frecuentes', q5: 'Opinión competidores', q6: 'Clasificación aduanera', q7: 'Despachantes',
+      q8: 'Sistemas actuales', q9: 'Contrato FedEx', q10: 'Certificado AFIP', q11: 'Otros transportistas',
+      q12: 'Funcionalidad MVP', q13: 'Tiendas importantes', q14: 'App/Web', q15: 'Panel interno',
+      q16: 'Presupuesto', q17: 'Tipo inversión', q18: 'Fecha límite', q19: 'Propiedad código', q20: 'Comentarios'
     };
 
-    function generateSummary() {
-      const data = getFormData();
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-
-      let text = '📋 *CUESTIONARIO COOPER CARGO*\n';
-      text += '━━━━━━━━━━━━━━━━━━━━━\n\n';
-
-      const sections = [
+    function buildWhatsAppText(data) {
+      var text = '📋 *CUESTIONARIO COOPER CARGO*\n━━━━━━━━━━━━━━━━━━━━━\n\n';
+      var sections = [
         { title: '🏢 NEGOCIO', keys: ['q1', 'q2', 'q3', 'q3_detail', 'q4', 'q5'] },
         { title: '⚙️ OPERATIVA', keys: ['q6', 'q7', 'q8', 'q9', 'q10', 'q11'] },
         { title: '💻 PLATAFORMA', keys: ['q12', 'q13', 'q14', 'q15'] },
-        { title: '💰 PRESUPUESTO Y TIEMPOS', keys: ['q16', 'q17', 'q18', 'q19', 'q20'] },
+        { title: '💰 PRESUPUESTO', keys: ['q16', 'q17', 'q18', 'q19', 'q20'] }
       ];
-
-      sections.forEach(section => {
-        text += `*${section.title}*\n`;
-        section.keys.forEach(key => {
-          const label = QUESTIONS_MAP[key];
-          const val = data[key];
+      sections.forEach(function (s) {
+        text += '*' + s.title + '*\n';
+        s.keys.forEach(function (k) {
+          var val = data[k];
           if (val) {
-            const display = Array.isArray(val) ? val.join(', ') : val;
-            text += `• ${label}\n  → ${display}\n`;
+            var display = Array.isArray(val) ? val.join(', ') : val;
+            text += '• ' + QUESTIONS_MAP[k] + ': ' + display + '\n';
           }
         });
         text += '\n';
       });
+      text += '✅ Respondidas: ' + countAnswered() + ' de ' + TOTAL_Q;
+      return text;
+    }
 
-      text += '━━━━━━━━━━━━━━━━━━━━━\n';
-      text += `Respondidas: ${countAnswered()} de ${TOTAL_Q}\n`;
-      text += 'Enviado desde formulario Data Oilers';
+    function sendToGoogleSheets(data) {
+      if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'PEGAR_TU_URL_AQUI') return Promise.resolve(false);
+      data.answered = countAnswered() + ' de ' + TOTAL_Q;
+      return fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function () { return true; }).catch(function () { return false; });
+    }
 
-      window._lastSummary = text;
+    function submitForm() {
+      var data = getFormData();
+      var answered = countAnswered();
+      if (answered < 3) {
+        showOverlay('✋', 'Completá al menos 3 preguntas', 'Necesitamos un mínimo de información para avanzar. ¡No hace falta responder todas!');
+        document.getElementById('btnWhatsApp').style.display = 'none';
+        return;
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      var btn = document.getElementById('btnSubmit');
+      btn.disabled = true; btn.textContent = '⏳ Enviando...';
+      showToast('Guardando respuestas...');
 
-      navigator.clipboard.writeText(text).then(() => {
-        showOverlay('✅', '¡Respuestas copiadas!', 'El resumen fue copiado al portapapeles. Podés pegarlo en WhatsApp o tocá el botón para enviarlo directamente.');
-      }).catch(() => {
-        showOverlay('📋', 'Resumen generado', 'No se pudo copiar automáticamente. Tocá "Enviar por WhatsApp" para compartir directamente.');
+      sendToGoogleSheets(data).then(function (sheetOk) {
+        window._lastSummary = buildWhatsAppText(data);
+        btn.disabled = false; btn.textContent = '📩 Enviar Respuestas';
+        hideToast();
+        var msg = sheetOk ? '✅ Las respuestas quedaron guardadas en nuestra planilla.\n\nAhora tocá el botón de WhatsApp para enviarnos un resumen directamente.' : 'Tocá el botón de WhatsApp para enviarnos tus respuestas directamente.';
+        showOverlay('🎉', '¡Gracias por completar!', msg);
+        document.getElementById('btnWhatsApp').style.display = 'inline-block';
       });
     }
 
     function shareWhatsApp() {
-      const text = window._lastSummary || 'Error generando resumen';
-      const encoded = encodeURIComponent(text);
-      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+      var text = window._lastSummary || buildWhatsAppText(getFormData());
+      window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank');
     }
 
     function showOverlay(icon, title, text) {
@@ -937,11 +913,17 @@
       document.getElementById('overlayText').textContent = text;
       document.getElementById('overlay').classList.add('show');
     }
-    function closeOverlay() {
-      document.getElementById('overlay').classList.remove('show');
-    }
+    function closeOverlay() { document.getElementById('overlay').classList.remove('show'); }
 
-    // Init
+    var toastTimer;
+    function showToast(msg) {
+      clearTimeout(toastTimer);
+      document.getElementById('toastText').textContent = msg;
+      document.getElementById('toast').classList.add('show');
+      toastTimer = setTimeout(function () { document.getElementById('toast').classList.remove('show'); }, 2500);
+    }
+    function hideToast() { document.getElementById('toast').classList.remove('show'); }
+
     loadProgress();
   </script>
 </body>
